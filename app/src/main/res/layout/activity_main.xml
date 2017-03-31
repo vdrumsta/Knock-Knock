@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_menu_background"
+    tools:context="com.notfunny.knockknock2.MainActivity">
+
+    <ImageButton
+        android:background="@drawable/door"
+        android:layout_width="120dip"
+        android:layout_height="170dip"
+        android:id="@+id/UpperRightDoor"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp"
+        android:layout_alignTop="@+id/UpperLeftDoor"
+        android:layout_toRightOf="@+id/UpperLeftDoor"
+        android:layout_toEndOf="@+id/UpperLeftDoor" />
+
+    <ImageButton
+        android:background="@drawable/door"
+        android:layout_width="120dip"
+        android:layout_height="170dip"
+        android:id="@+id/LowerLeftDoor"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/UpperLeftDoor"
+        android:layout_alignStart="@+id/UpperLeftDoor"
+        android:layout_marginBottom="34dp" />
+
+    <ImageButton
+        android:background="@drawable/door"
+        android:layout_width="120dip"
+        android:layout_height="170dip"
+        android:id="@+id/LowerRightDoor"
+        android:layout_alignTop="@+id/LowerLeftDoor"
+        android:layout_alignLeft="@+id/UpperRightDoor"
+        android:layout_alignStart="@+id/UpperRightDoor" />
+
+    <ImageButton
+        android:background="@drawable/door"
+        android:layout_width="120dip"
+        android:layout_height="170dip"
+        android:id="@+id/UpperLeftDoor"
+        android:layout_marginLeft="54dp"
+        android:layout_marginStart="54dp"
+        android:layout_above="@+id/LowerLeftDoor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="109dp" />
+
+
+</RelativeLayout>
