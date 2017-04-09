@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton upperRightDoor;
     private ImageButton lowerLeftDoor;
     private ImageButton lowerRightDoor;
+    private ImageButton heart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         upperRightDoor = (ImageButton) findViewById(R.id.UpperRightDoor);
         lowerLeftDoor = (ImageButton) findViewById(R.id.LowerLeftDoor);
         lowerRightDoor = (ImageButton) findViewById(R.id.LowerRightDoor);
+        heart = (ImageButton) findViewById(R.id.Heart);
 
         upperLeftDoor.setOnClickListener(
                 new View.OnClickListener() {
@@ -66,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(MainActivity.this, JokeActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        heart.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, FavouritesActivity.class);
                         startActivity(intent);
                     }
                 }
