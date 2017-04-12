@@ -25,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        upperLeftDoor = (ImageButton) findViewById(R.id.UpperLeftDoor);
+        upperRightDoor = (ImageButton) findViewById(R.id.UpperRightDoor);
+        lowerLeftDoor = (ImageButton) findViewById(R.id.LowerLeftDoor);
+        lowerRightDoor = (ImageButton) findViewById(R.id.LowerRightDoor);
+        heart = (ImageButton) findViewById(R.id.Heart);
+
         OnClickButtonListener();
     }
 
@@ -34,12 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void OnClickButtonListener() {
-        upperLeftDoor = (ImageButton) findViewById(R.id.UpperLeftDoor);
-        upperRightDoor = (ImageButton) findViewById(R.id.UpperRightDoor);
-        lowerLeftDoor = (ImageButton) findViewById(R.id.LowerLeftDoor);
-        lowerRightDoor = (ImageButton) findViewById(R.id.LowerRightDoor);
-        heart = (ImageButton) findViewById(R.id.Heart);
-
         upperLeftDoor.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
