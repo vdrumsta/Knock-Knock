@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         playSound(R.raw.knock_once);
-                        Intent intent = new Intent(MainActivity.this, JokeActivity2.class);
+                        Intent intent = new Intent(MainActivity.this, JokeActivity.class);
                         intent.putExtra("arg", "music");
                         startActivity(intent);
                     }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         playSound(R.raw.knock_once);
-                        Intent intent = new Intent(MainActivity.this, JokeActivity2.class);
+                        Intent intent = new Intent(MainActivity.this, JokeActivity.class);
                         intent.putExtra("arg", "nerdy");
                         startActivity(intent);
                     }

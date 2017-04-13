@@ -35,7 +35,7 @@
 
         </LinearLayout>
 
-        <!-- Box for Joke1 -->
+        <!-- Box for Joke2 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -54,7 +54,7 @@
 
         </LinearLayout>
 
-        <!-- Box for Joke1 -->
+        <!-- Box for Joke3 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -73,7 +73,7 @@
 
         </LinearLayout>
 
-        <!-- Box for Joke1 -->
+        <!-- Box for Joke4 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -92,7 +92,7 @@
 
         </LinearLayout>
 
-        <!-- Box for Joke1 -->
+        <!-- Box for Joke5 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

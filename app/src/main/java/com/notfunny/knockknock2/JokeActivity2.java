@@ -22,9 +22,8 @@ public class JokeActivity2 extends AppCompatActivity {
 
         JokeDBHandler handler = new JokeDBHandler(this, null, null, 1);
 
-        String jokeStr;
-
         // If argument given is a number, find the joke with that ID
+        String jokeStr;
         if (arg.matches("[0-9]+"))
             jokeStr = handler.getJoke(Integer.parseInt(arg));
             // Else, the argument is a category
