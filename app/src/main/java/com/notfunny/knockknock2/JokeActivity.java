@@ -4,6 +4,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -69,7 +70,7 @@ public class JokeActivity extends AppCompatActivity {
 
         // Set up the Joke Database handler
         File f = new File(getBaseContext().getExternalCacheDir() + "/jokesDB.sqlite");
-        if (f.exists()) f.delete();
+        //if (f.exists()) f.delete();
         handler = new JokeDBHandler(this, null, null, 1, f.exists());
 
         // Get argument from intent
@@ -110,8 +111,11 @@ public class JokeActivity extends AppCompatActivity {
         if (arg.matches("[0-9]+"))
             jokeStr = handler.getJoke(Integer.parseInt(arg));
             // Else, the argument is a category
-        else
-            jokeStr = handler.getJoke(arg);
+        else {
+            do
+                jokeStr = handler.getJoke(arg);
+            while (jokeStr.equals("0"));
+        }
 
         // Fill the textboxes with funny jokes haha
         if (jokeStr != null)
