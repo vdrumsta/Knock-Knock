@@ -70,7 +70,7 @@ public class JokeActivity extends AppCompatActivity {
 
         // Set up the Joke Database handler
         File f = new File(getBaseContext().getExternalCacheDir() + "/jokesDB.sqlite");
-        //if (f.exists()) f.delete();
+        if (f.exists()) f.delete();
         handler = new JokeDBHandler(this, null, null, 1, f.exists());
 
         // Get argument from intent
