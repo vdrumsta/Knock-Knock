@@ -20,7 +20,7 @@ public class JokeActivity2 extends AppCompatActivity {
         if (b != null)
             arg  = b.getString("arg");
 
-        JokeDBHandler handler = new JokeDBHandler(this, null, null, 1);
+        JokeDBHandler handler = new JokeDBHandler(this, null, null, 1, false);
 
         // If argument given is a number, find the joke with that ID
         String jokeStr;

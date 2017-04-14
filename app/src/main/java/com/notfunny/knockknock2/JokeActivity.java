@@ -11,6 +11,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.File;
+
 public class JokeActivity extends AppCompatActivity {
 
     private String arg;
@@ -66,7 +68,9 @@ public class JokeActivity extends AppCompatActivity {
         animFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
         // Set up the Joke Database handler
-        handler = new JokeDBHandler(this, null, null, 1);
+        File f = new File(getBaseContext().getExternalCacheDir() + "/jokesDB.sqlite");
+        if (f.exists()) f.delete();
+        handler = new JokeDBHandler(this, null, null, 1, f.exists());
 
         // Get argument from intent
         Bundle b = getIntent().getExtras();
