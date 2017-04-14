@@ -176,7 +176,7 @@ public class JokeDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
-            Log.d("joke", cursor.getString(1).toString());
+            //Log.d("joke", cursor.getString(1).toString());
             return cursor.getString(1).toString();
         }
         return null;

@@ -1,12 +1,15 @@
 package com.notfunny.knockknock2;
 
+import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -21,11 +24,13 @@ public class JokeActivity extends AppCompatActivity {
     TextView[] tvJokes;
 
     private MediaPlayer mySound;
+    private Vibrator vib;
     private ImageButton door;
     private int knockCount = 0;
-    private int knockCountResetMil = 650;
+    private int knockCountResetMil = 1000;
     private long startKnockTime;
     private boolean opened = false;
+    private boolean muted = false;
 
     private Animation[] animFadeIns;
     private Animation animFadeOut;
@@ -39,9 +44,11 @@ public class JokeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_joke);
 
         door = (ImageButton) findViewById(R.id.door);
+        vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         OnClickButtonListener();
 
         animFadeIns = new Animation[5];
@@ -76,8 +83,10 @@ public class JokeActivity extends AppCompatActivity {
         // Get argument from intent
         Bundle b = getIntent().getExtras();
         arg = "animals";
-        if (b != null)
+        if (b != null) {
             arg = b.getString("arg");
+            muted = b.getBoolean("EXTRA_MUTED");
+        }
 
         // If argument given is a number, find the joke with that ID
         String jokeStr;
@@ -132,8 +141,11 @@ public class JokeActivity extends AppCompatActivity {
     }
 
     private void playSound(int resid) {
-        mySound = MediaPlayer.create(this, resid);
-        mySound.start();
+        if (!muted) {
+            mySound = MediaPlayer.create(this, resid);
+            mySound.start();
+            vib.vibrate(200);
+        }
     }
 
     private void OnClickButtonListener() {
