@@ -10,4 +10,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.notfunny.knockknock2.FavouritesActivity">
 
+    <ListView
+        android:id="@+id/favJokes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
 </RelativeLayout>
