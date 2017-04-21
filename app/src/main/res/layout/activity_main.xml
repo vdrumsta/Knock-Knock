@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_menu_background"
+    android:background="@drawable/empty_activity_background"
     tools:context="com.notfunny.knockknock2.MainActivity">
 
     <ImageButton
-        android:background="@drawable/door"
+        android:background="@drawable/door_spritesheet_uncombined1"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/UpperRightDoor"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp"
+        android:layout_marginRight="50dp"
         android:layout_alignTop="@+id/UpperLeftDoor"
-        android:layout_toRightOf="@+id/UpperLeftDoor"
-        android:layout_toEndOf="@+id/UpperLeftDoor" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
-        android:background="@drawable/door"
+        android:background="@drawable/door_spritesheet_uncombined1"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/LowerLeftDoor"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/UpperLeftDoor"
         android:layout_alignStart="@+id/UpperLeftDoor"
-        android:layout_marginBottom="34dp" />
+        android:layout_marginBottom="20dp" />
 
     <ImageButton
-        android:background="@drawable/door"
+        android:background="@drawable/door_spritesheet_uncombined1"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/LowerRightDoor"
@@ -38,16 +38,17 @@
         android:layout_alignStart="@+id/UpperRightDoor" />
 
     <ImageButton
-        android:background="@drawable/door"
+        android:background="@drawable/door_spritesheet_uncombined1"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/UpperLeftDoor"
-        android:layout_marginLeft="54dp"
-        android:layout_marginStart="54dp"
-        android:layout_above="@+id/LowerLeftDoor"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="109dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="109dp"
+        android:layout_marginTop="94dp"/>
 
     <ImageButton
         android:background="@drawable/selector"
@@ -68,11 +69,33 @@
         android:background="@drawable/ic_toggle"
         android:textOff=""
         android:textOn=""
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_alignTop="@+id/Heart"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="12dp"
-        android:layout_marginEnd="12dp" />
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="20dip"
+        android:background="@drawable/floor"
+        android:id="@+id/UpperFloor"
+        android:adjustViewBounds="false"
+        android:scaleType="fitEnd"
+        android:layout_below="@+id/UpperRightDoor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="20dip"
+        android:background="@drawable/floor"
+        android:id="@+id/LowerFloor"
+        android:adjustViewBounds="false"
+        android:scaleType="fitEnd"
+        android:layout_below="@+id/LowerRightDoor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
