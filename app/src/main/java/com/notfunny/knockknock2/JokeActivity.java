@@ -117,19 +117,21 @@ public class JokeActivity extends AppCompatActivity {
             tvJokes[i].setAlpha(0);
 
         String jokeStr;
+        String[] jokeParts = null;
         if (arg.matches("[0-9]+"))
             jokeStr = handler.getJoke(Integer.parseInt(arg));
             // Else, the argument is a category
         else {
-            do
+            do {
                 jokeStr = handler.getJoke(arg);
-            while (jokeStr.equals("0"));
+                jokeParts = jokeStr.split(";");
+            }
+            while (jokeParts.length != 3);
         }
 
         // Fill the textboxes with funny jokes haha
         if (jokeStr != null)
         {
-            String[] jokeParts = jokeStr.split(";");
             tvJokes[2].setText(jokeParts[0]);
             tvJokes[3].setText(jokeParts[1]);
             tvJokes[4].setText(jokeParts[2]);
@@ -153,6 +155,7 @@ public class JokeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         if (knockCount == 0) {
                             startKnockTime = System.currentTimeMillis();
                         } else if (knockCount == 1 && (System.currentTimeMillis() - startKnockTime) > knockCountResetMil) { // if the person waited too long between their knocks, their knock count resets
