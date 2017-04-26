@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Bundle extras = new Bundle();
                         extras.putBoolean("EXTRA_MUTED", muted);
-                        extras.putString("arg","animals");
+                        extras.putString("arg","geography");
                         intent.putExtras(extras);
 
                         startActivity(intent);

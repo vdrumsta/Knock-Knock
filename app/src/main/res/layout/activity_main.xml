@@ -9,7 +9,7 @@
     tools:context="com.notfunny.knockknock2.MainActivity">
 
     <ImageButton
-        android:background="@drawable/door_spritesheet_uncombined1"
+        android:background="@drawable/door_geography"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/UpperRightDoor"
@@ -19,7 +19,7 @@
         android:layout_alignParentEnd="true" />
 
     <ImageButton
-        android:background="@drawable/door_spritesheet_uncombined1"
+        android:background="@drawable/door_music"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/LowerLeftDoor"
@@ -29,7 +29,7 @@
         android:layout_marginBottom="20dp" />
 
     <ImageButton
-        android:background="@drawable/door_spritesheet_uncombined1"
+        android:background="@drawable/door_nerdy"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/LowerRightDoor"
@@ -38,7 +38,7 @@
         android:layout_alignStart="@+id/UpperRightDoor" />
 
     <ImageButton
-        android:background="@drawable/door_spritesheet_uncombined1"
+        android:background="@drawable/door_animals"
         android:layout_width="120dip"
         android:layout_height="170dip"
         android:id="@+id/UpperLeftDoor"
