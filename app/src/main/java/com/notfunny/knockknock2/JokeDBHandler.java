@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class JokeDBHandler extends SQLiteOpenHelper {
 
     /* The SQL code to run which populates the database if it doesn't exist yet */
@@ -167,6 +169,7 @@ public class JokeDBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
+    /* get a random joke from the given category */
     public String getJoke(String category) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -177,11 +180,12 @@ public class JokeDBHandler extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             //Log.d("joke", cursor.getString(1).toString());
-            return cursor.getString(1).toString();
+            return cursor.getString(0).toString() + ";" + cursor.getString(1).toString();
         }
         return null;
     }
 
+    /* get the content of the joke with the given id */
     public String getJoke(int jokeId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -190,7 +194,77 @@ public class JokeDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(1).toString();
+            return cursor.getString(1);
         return null;
+    }
+
+    /* Favourite a joke if it isn't currently favourited, and vice versa */
+    public void toggleFavourite(int jokeId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String favQuery = "SELECT " + COLUMN_FAVOURITE
+                + " FROM " + TABLE_JOKES
+                + " WHERE " + COLUMN_ID + " = " + String.valueOf(jokeId);
+        Cursor cursor = db.rawQuery(favQuery, null);
+
+        if (!cursor.moveToFirst()) {
+            Log.e("JOKE", "joke with id = " + jokeId + " not found");
+            return;
+        }
+
+        Log.d("JOKE", "sssss " + cursor.getString(0));
+        boolean favourited = cursor.getString(0).equalsIgnoreCase("TRUE");
+
+        String command = "UPDATE " + TABLE_JOKES +
+                " SET " + COLUMN_FAVOURITE + " = " + (!favourited ? "\"TRUE\"" : "\"FALSE\"")
+                + " WHERE " + COLUMN_ID + " = " + String.valueOf(jokeId);
+        db.execSQL(command);
+    }
+
+    /* unfavourite the joke with the given id */
+    public void unFavourite(int jokeId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String command = "UPDATE " + TABLE_JOKES +
+                " SET " + COLUMN_FAVOURITE + " = \"FALSE\"" +
+                " WHERE " + COLUMN_ID + " = " + String.valueOf(jokeId);
+        db.execSQL(command);
+    }
+
+    /* Returns an ArrayList of currently favourited jokes */
+    public ArrayList<Integer> getFavouritedJokes() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_JOKES +
+                " WHERE " + COLUMN_FAVOURITE + " = \"TRUE\"";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            ArrayList<Integer> result = new ArrayList<Integer>();
+
+            do {
+                result.add(cursor.getInt(0));
+            } while (cursor.moveToNext());
+
+            return result;
+        }
+
+        // return null if no favourited jokes were found
+        return null;
+    }
+
+    /* Return true if the joke with the given id is favourited */
+    public boolean getJokeFavourited(int jokeId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT " + COLUMN_FAVOURITE + " FROM " + TABLE_JOKES +
+                " WHERE " + COLUMN_ID + " = " + String.valueOf(jokeId);
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst())
+            return cursor.getString(0).equalsIgnoreCase("TRUE");
+
+        Log.d("fav", "Joke with id = " + String.valueOf(jokeId) + " not found");
+        return false;
     }
 }

@@ -128,8 +128,9 @@
                 android:layout_marginLeft="5dp"
                 android:id="@+id/button_heart"
                 android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/textView4"
-                android:layout_alignStart="@+id/textView4" />
+                android:layout_alignLeft="@+id/button_new_joke"
+                android:layout_alignStart="@+id/button_new_joke"
+                android:onClick="heartClickListener"/>
 
             <ImageButton
                 android:background="@drawable/door_spritesheet_uncombined1"
@@ -138,8 +139,8 @@
                 android:layout_marginRight="5dp"
                 android:id="@+id/button_back"
                 android:layout_alignParentBottom="true"
-                android:layout_alignRight="@+id/textView4"
-                android:layout_alignEnd="@+id/textView4" />
+                android:layout_alignRight="@+id/button_new_joke"
+                android:layout_alignEnd="@+id/button_new_joke" />
 
             <Button
                 android:text="Tap Here For Another Joke!"
@@ -149,7 +150,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4"
+                android:id="@+id/button_new_joke"
                 android:layout_centerHorizontal="true"
                 android:layout_above="@+id/button_heart"
                 android:onClick="newJokeClickListener"/>

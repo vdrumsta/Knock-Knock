@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class JokeActivity extends AppCompatActivity {
     private String arg;
 
     TextView[] tvJokes;
+    View buttonHeart, buttonBack, buttonNewJoke;
 
     private MediaPlayer mySound;
     private Vibrator vib;
@@ -33,9 +35,12 @@ public class JokeActivity extends AppCompatActivity {
     private boolean muted = false;
 
     private Animation[] animFadeIns;
+    private Animation animDefaultFadeIn;
     private Animation animFadeOut;
 
     private JokeDBHandler handler;
+
+    private int currentJokeId;
 
     // The index of the TextView currently fading in
     private int currentTv = 0;
@@ -51,18 +56,33 @@ public class JokeActivity extends AppCompatActivity {
         vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         OnClickButtonListener();
 
+        buttonHeart = findViewById(R.id.button_heart);
+        buttonBack = findViewById(R.id.button_back);
+        buttonNewJoke = findViewById(R.id.button_new_joke);
+        animDefaultFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
         animFadeIns = new Animation[5];
         for (int i = 0; i < animFadeIns.length; i++) {
             animFadeIns[i] = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-
-            if (i == animFadeIns.length - 1) continue;
 
             final int finalI = i;
             animFadeIns[i].setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    tvJokes[finalI + 1].setAlpha(1);
-                    tvJokes[finalI + 1].startAnimation(animFadeIns[finalI + 1]);
+                    if (finalI < animFadeIns.length - 1) {
+                        tvJokes[finalI + 1].startAnimation(animFadeIns[finalI + 1]);
+                        tvJokes[finalI + 1].setAlpha(1);
+                    } else {
+                        buttonHeart.startAnimation(animDefaultFadeIn);
+                        buttonBack.startAnimation(animDefaultFadeIn);
+                        buttonNewJoke.startAnimation(animDefaultFadeIn);
+                        buttonHeart.setAlpha(1);
+                        buttonBack.setAlpha(1);
+                        buttonNewJoke.setAlpha(1);
+                        buttonHeart.setClickable(true);
+                        buttonBack.setClickable(true);
+                        buttonNewJoke.setClickable(true);
+                    }
                 }
 
                 public void onAnimationRepeat(Animation animation) {
@@ -77,7 +97,7 @@ public class JokeActivity extends AppCompatActivity {
 
         // Set up the Joke Database handler
         File f = new File(getBaseContext().getExternalCacheDir() + "/jokesDB.sqlite");
-        if (f.exists()) f.delete();
+        //if (f.exists()) f.delete();
         handler = new JokeDBHandler(this, null, null, 1, f.exists());
 
         // Get argument from intent
@@ -105,16 +125,35 @@ public class JokeActivity extends AppCompatActivity {
 
         for (int i = 0; i < tvJokes.length; i++)
             tvJokes[i].setAlpha(0);
+
+        /*
+        buttonHeart.setAlpha(0);
+        buttonBack.setAlpha(0);
+        buttonNewJoke.setAlpha(0);
+        */
+
+        for (Integer i: handler.getFavouritedJokes())
+            Log.d("fav", String.valueOf(i));
     }
 
     public void newJokeClickListener(View view) {
         newJoke();
     }
 
+    public void heartClickListener(View view) {
+        handler.toggleFavourite(currentJokeId);
+    }
+
     private void newJoke() {
         // Make the TextViews dissappear
         for (int i = 1; i < tvJokes.length; i++)
             tvJokes[i].setAlpha(0);
+        buttonHeart.setAlpha(0);
+        buttonBack.setAlpha(0);
+        buttonNewJoke.setAlpha(0);
+        buttonHeart.setClickable(false);
+        buttonBack.setClickable(false);
+        buttonNewJoke.setClickable(false);
 
         String jokeStr;
         String[] jokeParts = null;
@@ -126,20 +165,24 @@ public class JokeActivity extends AppCompatActivity {
                 jokeStr = handler.getJoke(arg);
                 jokeParts = jokeStr.split(";");
             }
-            while (jokeParts.length != 3);
+            while (jokeParts.length != 4);
         }
+
+        currentJokeId = Integer.parseInt(jokeParts[0]);
 
         // Fill the textboxes with funny jokes haha
         if (jokeStr != null)
         {
-            tvJokes[2].setText(jokeParts[0]);
-            tvJokes[3].setText(jokeParts[1]);
-            tvJokes[4].setText(jokeParts[2]);
+            tvJokes[2].setText(jokeParts[1]);
+            tvJokes[3].setText(jokeParts[2]);
+            tvJokes[4].setText(jokeParts[3]);
         }
 
         // Fade the TextViews in, (one after the other)
         tvJokes[0].setAlpha(1);
         tvJokes[0].startAnimation(animFadeIns[0]);
+
+        Log.d("fav", "Joke " + currentJokeId + " is " + (handler.getJokeFavourited(currentJokeId) ? "" : "not ") + "favourited");
     }
 
     private void playSound(int resid) {
