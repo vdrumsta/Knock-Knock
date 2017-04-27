@@ -24,6 +24,7 @@ public class JokeActivity extends AppCompatActivity {
 
     TextView[] tvJokes;
     View buttonHeart, buttonBack, buttonNewJoke;
+    View blackScreen;
 
     private MediaPlayer mySound;
     private Vibrator vib;
@@ -59,6 +60,8 @@ public class JokeActivity extends AppCompatActivity {
         buttonHeart = findViewById(R.id.button_heart);
         buttonBack = findViewById(R.id.button_back);
         buttonNewJoke = findViewById(R.id.button_new_joke);
+        blackScreen = findViewById(R.id.black_screen);
+
         animDefaultFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
         animFadeIns = new Animation[5];
@@ -216,6 +219,7 @@ public class JokeActivity extends AppCompatActivity {
                                 playSound(R.raw.door_creak);
                                 opened = true;
                                 door.setClickable(false);
+                                blackScreen.startAnimation(animFadeOut);
                                 newJoke();
                             } else {
                                 door.setBackgroundResource(R.drawable.animated_door_background2);
