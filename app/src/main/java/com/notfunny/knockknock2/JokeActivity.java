@@ -135,8 +135,8 @@ public class JokeActivity extends AppCompatActivity {
         buttonNewJoke.setAlpha(0);
         */
 
-        for (Integer i: handler.getFavouritedJokes())
-            Log.d("fav", String.valueOf(i));
+        //for (Integer i: handler.getFavouritedJokes())
+        //    Log.d("fav", String.valueOf(i));
     }
 
     public void newJokeClickListener(View view) {

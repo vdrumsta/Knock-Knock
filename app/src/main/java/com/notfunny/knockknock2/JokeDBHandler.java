@@ -190,10 +190,10 @@ public class JokeDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_JOKES +
-                " WHERE " + COLUMN_CATEGORY + " = " + jokeId;
+                " WHERE " + COLUMN_ID + " = " + jokeId;
         Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor.moveToFirst())
+            if (cursor.moveToFirst())
             return cursor.getString(1);
         return null;
     }
