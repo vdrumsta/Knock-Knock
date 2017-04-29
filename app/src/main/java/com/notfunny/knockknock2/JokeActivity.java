@@ -29,11 +29,13 @@ public class JokeActivity extends AppCompatActivity {
     private MediaPlayer mySound;
     private Vibrator vib;
     private ImageButton door;
+    private ImageButton heart;
     private int knockCount = 0;
     private int knockCountResetMil = 1000;
     private long startKnockTime;
     private boolean opened = false;
     private boolean muted = false;
+    boolean jokeFavourited;
 
     private Animation[] animFadeIns;
     private Animation animDefaultFadeIn;
@@ -54,6 +56,7 @@ public class JokeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_joke);
 
         door = (ImageButton) findViewById(R.id.door);
+        heart = (ImageButton) findViewById(R.id.button_heart);
         vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         OnClickButtonListener();
 
@@ -173,6 +176,15 @@ public class JokeActivity extends AppCompatActivity {
 
         currentJokeId = Integer.parseInt(jokeParts[0]);
 
+        // Color the heart if it is favourited
+        jokeFavourited = handler.getJokeFavourited(currentJokeId);
+        if (jokeFavourited) {
+            heart.setBackgroundResource(R.drawable.heart_colored);
+        }
+        else {
+            heart.setBackgroundResource(R.drawable.heart_uncolored);
+        }
+
         // Fill the textboxes with funny jokes haha
         if (jokeStr != null)
         {
@@ -232,6 +244,23 @@ public class JokeActivity extends AppCompatActivity {
                             anim.start();
 
                             knockCount = 0;
+                        }
+                    }
+                }
+        );
+
+        heart.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        handler.toggleFavourite(currentJokeId);
+                        jokeFavourited = !jokeFavourited;
+
+                        if (jokeFavourited) {
+                            heart.setBackgroundResource(R.drawable.heart_colored);
+                        }
+                        else {
+                            heart.setBackgroundResource(R.drawable.heart_uncolored);
                         }
                     }
                 }
