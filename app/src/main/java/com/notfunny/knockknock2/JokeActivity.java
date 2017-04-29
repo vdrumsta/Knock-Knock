@@ -23,7 +23,7 @@ public class JokeActivity extends AppCompatActivity {
     private String arg;
 
     TextView[] tvJokes;
-    View buttonHeart, buttonBack, buttonNewJoke;
+    View buttonHeart, buttonNewJoke;
     View blackScreen;
 
     private MediaPlayer mySound;
@@ -61,7 +61,6 @@ public class JokeActivity extends AppCompatActivity {
         OnClickButtonListener();
 
         buttonHeart = findViewById(R.id.button_heart);
-        buttonBack = findViewById(R.id.button_back);
         buttonNewJoke = findViewById(R.id.button_new_joke);
         blackScreen = findViewById(R.id.black_screen);
 
@@ -80,13 +79,10 @@ public class JokeActivity extends AppCompatActivity {
                         tvJokes[finalI + 1].setAlpha(1);
                     } else {
                         buttonHeart.startAnimation(animDefaultFadeIn);
-                        buttonBack.startAnimation(animDefaultFadeIn);
                         buttonNewJoke.startAnimation(animDefaultFadeIn);
                         buttonHeart.setAlpha(1);
-                        buttonBack.setAlpha(1);
                         buttonNewJoke.setAlpha(1);
                         buttonHeart.setClickable(true);
-                        buttonBack.setClickable(true);
                         buttonNewJoke.setClickable(true);
                     }
                 }
@@ -134,7 +130,6 @@ public class JokeActivity extends AppCompatActivity {
 
         /*
         buttonHeart.setAlpha(0);
-        buttonBack.setAlpha(0);
         buttonNewJoke.setAlpha(0);
         */
 
@@ -155,10 +150,8 @@ public class JokeActivity extends AppCompatActivity {
         for (int i = 1; i < tvJokes.length; i++)
             tvJokes[i].setAlpha(0);
         buttonHeart.setAlpha(0);
-        buttonBack.setAlpha(0);
         buttonNewJoke.setAlpha(0);
         buttonHeart.setClickable(false);
-        buttonBack.setClickable(false);
         buttonNewJoke.setClickable(false);
 
         String jokeStr;

@@ -163,16 +163,6 @@
                 android:layout_alignStart="@+id/button_new_joke"
                 android:onClick="heartClickListener"/>
 
-            <ImageButton
-                android:background="@drawable/door_spritesheet_uncombined1"
-                android:layout_width="50dip"
-                android:layout_height="46dip"
-                android:layout_marginRight="5dp"
-                android:id="@+id/button_back"
-                android:layout_alignParentBottom="true"
-                android:layout_alignRight="@+id/button_new_joke"
-                android:layout_alignEnd="@+id/button_new_joke" />
-
             <Button
                 android:text="Tap Here For Another Joke!"
                 android:textSize="22sp"
